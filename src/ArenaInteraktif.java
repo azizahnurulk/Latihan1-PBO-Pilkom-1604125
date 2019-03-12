@@ -4,7 +4,7 @@
  */
 import java.util.Scanner;
 
-public class ArenaInteraktif {
+public class ArenaInteraktif extends Arena {
     private Robot robot1;
     private Robot robot2;
 
@@ -34,22 +34,26 @@ public class ArenaInteraktif {
         while (!isSelesai) {
             System.out.println("");
             System.out.println("Giliran robot:"+robotAktif.nama);
-
             //
             Scanner in = new Scanner(System.in);
-            System.out.println("List Senjata:\n");
-            for (int i = 0; i < robotAktif.jumlahSenjata(); i++){
-                System.out.println((i+1)+ "Senjata " + robotAktif.getSenjata(i).namaSenjata);
-            }
-            System.out.println("Pilih Senjata:");
-            int pilihSenjata = in.nextInt();
 
-            System.out.println("List Perisai:\n");
-            for (int i = 0; i < robotAktif.jumlahPerisai(); i++){
-                System.out.println((i+1)+ "Senjata " + robotAktif.getPerisai(i).namaPerisai);
+            // menampilkan senjata
+            System.out.println("\nList Senjata " + robotAktif.nama +":");
+            for (int i = 0; i < robotAktif.jumlahSenjata(); i++){
+                System.out.println((i+1)+ " Senjata " + robotAktif.kumpulanSenjata.get(i).namaSenjata);
             }
-            System.out.println("Pilih Perisai:");
+            System.out.println("\nPilih Senjata Untuk " + robotAktif.nama +":");
+            int pilihSenjata = in.nextInt();
+            robotAktif.oSenjata = robotAktif.kumpulanSenjata.get(pilihSenjata-1);
+
+            // menampilkan perisai
+            System.out.println("\nList Perisai " + robotAktif.nama +":");
+            for (int i = 0; i < robotAktif.jumlahPerisai(); i++){
+                System.out.println((i+1)+ " Perisai " + robotAktif.kumpulanPerisai.get(i).namaPerisai);
+            }
+            System.out.println("\nPilih Perisai " + robotPasif.nama +":");
             int pilihPerisai = in.nextInt();
+            robotPasif.oPerisai = robotPasif.kumpulanPerisai.get(pilihPerisai-1);
 
             System.out.println("Robot menyerang dengan senjata "+robotAktif.oSenjata.namaSenjata);
             System.out.println("Robot menggunakan "+robotAktif.oPerisai.namaPerisai);
@@ -82,35 +86,37 @@ public class ArenaInteraktif {
 
     public static void main(String [] args) {
         //buat arena
-        ArenaInteraktif oArenaInteraktif = new ArenaInteraktif();
+        ArenaInteraktif oArena = new ArenaInteraktif();
 
         //siapkan robot
         Robot robot1 = new Robot("Robot pertama");
         Robot robot2 = new Robot("Robot kedua");
 
-//        // No. 4 (tambahkan Senjata Robot1)
-//        Senjata oSenjataKilat1 = new SenjataKilat();
-//        robot1.tambahSenjata(oSenjataKilat1);
-//
-//        // tambahkan Senjata Robot2
-//        Senjata oSenjataKilat2 = new SenjataKilat();
-//        robot2.tambahSenjata(oSenjataKilat2);
-//
-//        // tambahkan Perisai ke Robot1
-//        Perisai oRedShield1 = new RedShield();
-//        Perisai oBlueShield1 = new BlueShield();
-//        robot1.tambahPerisai(oRedShield1);
-//
-//        // tambahkan Perisai ke Robot2
-//        Perisai oRedShield2 = new RedShield();
-//        Perisai oBlueShield2 = new BlueShield();
-//        robot2.tambahPerisai(oBlueShield2);
+        // No. 4 (tambahkan Senjata Robot1)
+        Senjata oSenjataKilat1 = new SenjataKilat();
+        robot1.addSenjata(oSenjataKilat1);
+
+        // tambahkan Senjata Robot2
+        Senjata oSenjataKilat2 = new SenjataKilat();
+        robot2.addSenjata(oSenjataKilat2);
+
+        // tambahkan Perisai ke Robot1
+        Perisai oRedShield1 = new RedShield();
+        Perisai oBlueShield1 = new BlueShield();
+        robot1.addPerisai(oRedShield1);
+        robot1.addPerisai(oBlueShield1);
+
+        // tambahkan Perisai ke Robot2
+        Perisai oRedShield2 = new RedShield();
+        Perisai oBlueShield2 = new BlueShield();
+        robot2.addPerisai(oRedShield1);
+        robot2.addPerisai(oBlueShield2);
 
         //tambahkan robot ke arena
-        oArenaInteraktif.tambahRobot(robot1,robot2);
+        oArena.tambahRobot(robot1,robot2);
 
         //mainkan
-        oArenaInteraktif.bertanding();
+        oArena.bertanding();
 
     }
 

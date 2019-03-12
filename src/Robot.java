@@ -13,6 +13,7 @@ public class Robot {
     ArrayList<Senjata> kumpulanSenjata = new ArrayList<>(); // menyimpan senjata
     ArrayList<Perisai> kumpulanPerisai = new ArrayList<>(); // menyimpan perisai
 
+    // menghitung banyak array
     public int jumlahSenjata(){
         return kumpulanSenjata.size();
     }
@@ -20,11 +21,13 @@ public class Robot {
         return kumpulanPerisai.size();
     }
 
-    public Senjata getSenjata(int i){
-        return kumpulanSenjata.get(i);
+    // ngeadd item senjata arena Interaktif
+    public void addSenjata(Senjata s){
+        kumpulanSenjata.add(s);
     }
-    public Perisai getPerisai(int i){
-        return kumpulanPerisai.get(i);
+    // ngeadd item perisai arena Interaktif
+    public void addPerisai(Perisai p){
+        kumpulanPerisai.add(p);
     }
 
     //isi senjata milik robot
@@ -35,16 +38,6 @@ public class Robot {
     public void  tambahPerisai(Perisai p) {
 
         oPerisai = p;
-    }
-
-    // Senjata yang digunakan
-    public void tambahKumpulanSenjata(Senjata s){
-        kumpulanSenjata.add(s);
-    }
-
-    // Perisai yang digunakan
-    public void tambahKumpulanPerisai(Perisai p){
-        kumpulanPerisai.add(p);
     }
 
     //print kesehatan dsb
